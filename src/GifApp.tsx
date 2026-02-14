@@ -1,4 +1,4 @@
-import { PreviousSearches } from "./gifs/PreviousSearches"
+import { PreviousSearches } from "./gifs/components/PreviousSearches"
 import { mockGifs } from "./mock-data/gif.mock,"
 import { CustomHeader } from "./shared/components/CustomHeader"
 import { SearchBar } from "./shared/components/SearchBar"

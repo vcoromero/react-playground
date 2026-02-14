@@ -1,12 +1,16 @@
-
-export const PreviousSearches = () => {
+interface Props {
+    searches: string[]
+}
+export const PreviousSearches = ({ searches }: Props) => {
     return (
         <div className="previous-searches">
             <h2>Previous searches</h2>
             <ul className="previous-searches-list">
-                <li>Hollow Knight</li>
-                <li>Silksong</li>
-                <li>Hades</li>
+                {
+                    searches.map((term) => (
+                        <li key={term}>{term}</li>
+                    ))
+                }
             </ul>
         </div >
     )

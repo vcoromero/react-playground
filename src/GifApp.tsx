@@ -1,8 +1,10 @@
+import { GifList } from "./gifs/components/GifList"
 import { PreviousSearches } from "./gifs/components/PreviousSearches"
-import { mockGifs } from "./mock-data/gif.mock,"
+import { mockGifs } from "./mock-data/gif.mock"
 import { CustomHeader } from "./shared/components/CustomHeader"
 import { SearchBar } from "./shared/components/SearchBar"
 
+const searches = ['Hollow knigt', 'Silksong', 'Hades']
 export const GifApp = () => {
     return (
         <>
@@ -13,18 +15,10 @@ export const GifApp = () => {
             <SearchBar placeholder="Search what you want" />
 
             {/* Previous searches */}
-            <PreviousSearches />
+            <PreviousSearches searches={searches} />
 
             {/* Gifs */}
-            <div className="gifs-container">
-                {mockGifs.map((gif) => (
-                    <div className="gif-card" key={gif.id}>
-                        <img src={gif.url} alt={gif.title} />
-                        <h3>{gif.title}</h3>
-                        <p>{gif.width}x{gif.height}(1.5mb)</p>
-                    </div>
-                ))}
-            </div>
+            <GifList gifs={mockGifs} />
         </>
     )
 }

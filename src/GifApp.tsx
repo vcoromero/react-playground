@@ -1,14 +1,15 @@
 import { useState } from "react"
+import { getGifsByQuery } from "./gifs/actions/get-gifs-by-query.actions"
 import { GifList } from "./gifs/components/GifList"
 import { PreviousSearches } from "./gifs/components/PreviousSearches"
-import { mockGifs } from "./mock-data/gif.mock"
+import type { Gif } from "./gifs/interfaces/gif.interface"
 import { CustomHeader } from "./shared/components/CustomHeader"
 import { SearchBar } from "./shared/components/SearchBar"
-import { getGifsByQuery } from "./gifs/actions/get-gifs-by-query.actions"
 
 export const GifApp = () => {
 
-    const [previousTerms, setPreviousTerms] = useState(['Hollow Knigth'])
+    const [gifs, setGifs] = useState<Gif[]>([])
+    const [previousTerms, setPreviousTerms] = useState<string[]>([])
 
     const handleTermClicked = (term: string) => {
         console.log({ term })
@@ -22,9 +23,8 @@ export const GifApp = () => {
 
         setPreviousTerms([query, ...previousTerms.splice(0, 7)])
 
-        const gifs = await getGifsByQuery(query)
-
-        console.log(gifs);
+        const gifs= await getGifsByQuery(query)
+        setGifs(gifs)
     }
 
     return (
@@ -39,7 +39,7 @@ export const GifApp = () => {
             <PreviousSearches searches={previousTerms} onLabelClicked={handleTermClicked} />
 
             {/* Gifs */}
-            <GifList gifs={mockGifs} />
+            <GifList gifs={gifs} />
         </>
     )
 }

@@ -10,12 +10,11 @@ type TrafficLightColor = keyof typeof colors;
 
 export const TrafficLightWithEffect = () => {
 
-    const [ligth, setligth] = useState<TrafficLightColor>('red')
+    const [light, setLight] = useState<TrafficLightColor>('red')
     const [countdown, setCountdown] = useState(5)
 
     useEffect(() => {
-
-        if (countdown === 0) { return }
+        if (countdown === 0) return
 
         const intervalId = setInterval(() => {
             setCountdown(prev => prev - 1)
@@ -26,18 +25,55 @@ export const TrafficLightWithEffect = () => {
         }
     }, [countdown])
 
+    useEffect(() => {
+        if (countdown > 0) return
+
+        setTimeout(() => {
+            setCountdown(5)
+        }, 1000)
+
+        if (light === 'red') {
+            setTimeout(() => {
+                setLight('green')
+            }, 1000)
+            return
+        }
+
+        if (light === 'yellow') {
+            setTimeout(() => {
+                setLight('red')
+            }, 1000)
+            return
+        }
+
+        if (light === 'green') {
+            setTimeout(() => {
+                setLight('yellow')
+            }, 1000)
+            return
+        }
+
+
+    }, [light, countdown])
+
 
     return (
         <div className="min-h-screen bg-linear-to-br from-slate-900 via-gray-900 to-slate-800 flex items-center justify-center p-4">
             <div className="flex flex-col items-center space-y-8">
 
                 <h1 className="text-white text-3xl font-thin">Traffic Light with useEffect</h1>
-                <h2 className="text-white text-xl">countdown: {countdown}</h2>
+                <h2 className="text-white text-xl">Countdown: {countdown}</h2>
+
+                <div className="w-64 bg-gray-700 rounded-full h-2">
+                    <div className="bg-blue-500 h-2 rounded-full transition-all duration-1000 ease-linear"
+                        style={{ width: `${(countdown / 5) * 100}%` }}
+                        ></div>
+                </div>
 
 
-                <div className={`w-32 h-32 ${ligth === 'red' ? colors[ligth] : 'bg-gray-500'} rounded-full`}></div>
-                <div className={`w-32 h-32 ${ligth === 'yellow' ? colors[ligth] : 'bg-gray-500'} rounded-full`}></div>
-                <div className={`w-32 h-32 ${ligth === 'green' ? colors[ligth] : 'bg-gray-500'} rounded-full`}></div>
+                <div className={`w-32 h-32 ${light === 'red' ? colors[light] : 'bg-gray-500'} rounded-full`}></div>
+                <div className={`w-32 h-32 ${light === 'yellow' ? colors[light] : 'bg-gray-500'} rounded-full`}></div>
+                <div className={`w-32 h-32 ${light === 'green' ? colors[light] : 'bg-gray-500'} rounded-full`}></div>
             </div>
         </div>
     );

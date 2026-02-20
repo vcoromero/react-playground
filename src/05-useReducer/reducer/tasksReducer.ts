@@ -17,12 +17,17 @@ export type TaskAction =
     | { type: 'TOGGLE_TODO'; payload: number }
 
 export const getTasksInitialState = (): TaskState => {
-    return {
-        todos: [],
-        length: 0,
-        completed: 0,
-        pending: 0
+
+    const localStorageState = localStorage.getItem('tasks-state')
+    if (!localStorageState) {
+        return {
+            todos: [],
+            length: 0,
+            completed: 0,
+            pending: 0
+        }
     }
+    return JSON.parse(localStorageState)
 }
 
 export const taskReducer = (

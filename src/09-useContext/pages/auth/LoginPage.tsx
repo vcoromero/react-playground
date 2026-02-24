@@ -1,7 +1,7 @@
 
 export const LoginPage = () => {
     return (
-        <div className="bg-gradient flex flex-col gap-4">
+        <div>
             <h1 className="text-2xl font-thin text-white">LoginPage</h1>
         </div>
     )

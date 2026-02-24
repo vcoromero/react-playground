@@ -9,7 +9,7 @@ export const MemoHook = () => {
 
     const handleMyAPICall = useCallback(() => {
         console.log('Calling my API');
-    }, [])
+    }, [subtitle])
 
     return (
         <div className="bg-gradient flex flex-col gap-4">

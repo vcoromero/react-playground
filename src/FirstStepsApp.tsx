@@ -19,7 +19,6 @@ export function FirstStepsApp() {
             {itemsInCart.map((item) => (
                 <ItemCounter key={item.productName} productName={item.productName} quantity={item.quantity} />
             ))}
-
         </>
     )
 }

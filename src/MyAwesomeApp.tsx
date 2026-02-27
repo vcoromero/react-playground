@@ -19,7 +19,6 @@ export function MyAwesomeApp() {
         borderRadius: isActive ? 10 : 20,
         padding: 10
     }
-
     return (
         <>
             <h1>{firstName}</h1>
